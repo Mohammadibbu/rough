@@ -1,0 +1,18 @@
+body{
+    background:rgb(216, 250, 218);
+    
+}
+nav{
+    background-color: rgb(26, 218, 36);
+    
+}
+.nav-link{
+    color: rgb(247, 247, 247);
+    transition-duration: .21s;
+}
+.nav-link:hover{
+
+    color: black;
+    font-size: larger;
+    font-weight: 500;
+}
