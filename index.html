@@ -1,56 +1,164 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="style.css">
- 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase-auth.js"></script> -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
-</head>
-<body >
-  <div class="container">
-  <!-- <img src="img.png" alt="img" id="img"> -->
-     
-    <form class="login-form" id="login-form">
-      <div id="login-error"></div>
-       
-      <h1>Login</h1>
+  <head>
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- fontstyle -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase-auth.js"></script> -->
+    <!-- email.js API -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <!-- firebase CDN -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- <img src="img.png" alt="img" id="img"> -->
 
-      <span style="color: red;">*</span><label for="login-email">Email</label> <input type="email" name="username" placeholder="example321@gmail.com" value="mo@gmail.com" id="login-email">
-      <span style="color: red;">*</span><label for="login-password">Password</label><input type="password" name="password" placeholder="*******" value="789654" id="login-password">
-      <a href="forget password.html" id="fp">Forget password?</a>
-     
-      <button type="submit" id="login-btn">Login</button>
-      <span style="color: rgb(121, 121, 69);">____________OR___________</span>
+      <form class="login-form" id="login-form">
+        <div id="login-error"></div>
+        <div class="header-container"><h1>Login</h1></div>
+        <div class="login-form-email">
+          <span style="color: red">*</span
+          ><label for="login-email">Email</label>
+          <input
+            type="email"
+            name="username"
+            placeholder="example321@gmail.com"
+            value="mo@gmail.com"
+            id="login-email"
+          />
+        </div>
+        <div class="login-form-password">
+          <span style="color: red">*</span
+          ><label for="login-password">Password</label
+          ><input
+            type="password"
+            name="password"
+            placeholder="*******"
+            value="789654"
+            id="login-password"
+          />
+          <b id="login-showpwd" class="show-password">
+            <i class="fa fa-eye" id="eye-1"></i>
+          </b>
+        </div>
 
-      <div class="icons">
-        <button id="google-login" class="icon-btn"><i class="fa fa-google" ></i></button>
-        <button  id="fb-login" onclick="alert('hi')" class="icon-btn"><i class="fa fa-facebook-f" ></i></button></div>
-      <p class="signup-link">Don't have an account? <a href="#">Sign up</a></p>
-    </form>
-    <form class="signup-form" id="signup-form">
-        <div id="signup-error" style="text-align: center;"></div>
-      
-      <h1>Sign Up</h1>
-      <span style="color: red;">*</span><label for="signup-name">Name</label><input type="text" name="fullname" placeholder="Full Name" id="signup-name">
-      <span style="color: red;">*</span><label for="signup-mail">Email</label><input type="email" name="email" placeholder="Email" id="signup-mail">
-      <span style="color: red;">*</span><label for="signup-pwd">Password</label><input type="password" name="password" placeholder="Password" id="signup-pwd">
-      <span style="color: red;">*</span><label for="confirm-password">Re-type password</label><input type="password" name="confirm-password" placeholder="confirm your password" id="confirm-password">
-      <button type="submit">Sign Up</button>
-      <span style="color: rgb(121, 121, 69);">_____________OR_____________</span>
-      <div class="icons">
-      <button class="icon-btn"><i class="fa fa-google" ></i></button>
-      <button class="icon-btn"><i class="fa fa-facebook-f" ></i></button></div>
-      <p class="login-link">Already have an account? <a href="#">Log in</a></p>
-    </form>
-  </div>
-  <!-- <div id="recaptcha-container" style="text-align: center;"></div>
+        <a href="forget password.html" id="fp">Forget password?</a>
+
+        <button type="submit" id="login-btn" class="btn">Login</button>
+        <span style="color: rgb(121, 121, 69)">____________OR___________</span>
+
+        <div class="icons">
+          <button id="google-login" class="img-btn">
+            <img src="icons/google icon.png" alt="googleicon" class="icon" />
+          </button>
+          <button id="fb-login" onclick="alert('hi')" class="img-btn">
+            <img
+              src="icons/fbicon.jpeg"
+              alt="facebook icon"
+              class="icon"
+              style="height: 43px"
+            />
+          </button>
+        </div>
+        <p class="signup-link" id="s">
+          Don't have an account? <a href="#">Sign up</a>
+        </p>
+      </form>
+
+      <!-- -----------signup form----------------------------------- -->
+      <form class="signup-form" id="signup-form">
+        <div
+          id="signup-error"
+          style="text-align: center"
+          class="error-message"
+        ></div>
+        <div class="header-content"><h1>Sign Up</h1></div>
+        <div class="signup-form-name">
+          <span style="color: red">*</span><label for="signup-name">Name</label
+          ><input
+            type="text"
+            name="fullname"
+            placeholder="Full Name"
+            id="signup-name"
+          />
+        </div>
+        <div class="signup-form-email">
+          <span style="color: red">*</span><label for="signup-mail">Email</label
+          ><input
+            type="email"
+            name="email"
+            placeholder="Email"
+            id="signup-mail"
+          />
+        </div>
+        <div class="signup-form-otp">
+          <span style="color: red">*</span><label for="signup-pwd">otp</label
+          ><input
+            type="text"
+            name="password"
+            placeholder="Enter OTP"
+            id="otp"
+          />
+          <button type="submit" id="SendOtp" class="">send OTP</button>
+        </div>
+        <div class="signup-form-password">
+          <span style="color: red">*</span
+          ><label for="signup-pwd">Password</label
+          ><input
+            type="password"
+            name="password"
+            placeholder="Password"
+            id="signup-pwd"
+          />
+          <b id="signup-showpwd" class="show-password">
+            <i class="fa fa-eye" id="eye-2"></i>
+          </b>
+        </div>
+        <div class="signup-form-password">
+          <span style="color: red">*</span
+          ><label for="confirm-password">Re-type password</label
+          ><input
+            type="password"
+            name="confirm-password"
+            placeholder="confirm your password"
+            id="confirm-password"
+          />
+          <b id="signupCnfrm-showpwd" class="show-password">
+            <i class="fa fa-eye" id="eye-3"></i>
+          </b>
+        </div>
+        <button type="submit" id="signup" class="btn">Sign Up</button>
+        <!-- <span style="color: rgb(121, 121, 69)"
+          >_____________OR_____________</span
+        >
+        <div class="icons">
+          <button class="icon-btn"><i class="fa fa-google"></i></button>
+          <button class="icon-btn"><i class="fa fa-facebook-f"></i></button>
+        </div> -->
+        <p class="login-link">
+          Already have an account? <a href="#">Log in</a>
+        </p>
+      </form>
+    </div>
+    <!-- <div id="recaptcha-container" style="text-align: center;"></div>
   <button id="sendotp">send otp</button>
   <input id="otpcode" type="number" placeholder="enter otp"> -->
-  <script type="module" src="script.js"></script>
-</body>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>
