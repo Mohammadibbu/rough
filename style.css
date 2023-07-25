@@ -1,130 +1,170 @@
-@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Pangolin&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Pangolin&display=swap");
 * {
-    box-sizing: border-box;
-  }
-  
-  body {
+  box-sizing: border-box;
+}
 
-    font-family: 'Mochiy Pop One', sans-serif;
-    font-family: 'Pangolin', cursive;
-    background: rgb(47,75,75);
-background-image: linear-gradient(0deg, rgba(47,75,75,0.958420868347339) 4%, rgba(185,177,120,1) 60%, rgba(221,198,130,0.8911939775910365) 87%);
-background-repeat: no-repeat;
-background-size: cover;
-    margin: 0;
-  }
-  
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 50px 0;
-  }
-  
-  form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(54, 38, 38, 0.1);
-    width: 300px;
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    outline: none;
-    border-bottom: #216625 1px solid;
-    /* border-radius: 3px; */
-    transition: .5s ease-in;
-  }
-  input:focus {
-   
-   border-bottom: #216625 3px solid;
-  }
-  
-  button {
-    font-family: 'Mochiy Pop One', sans-serif;
-    font-family: 'Pangolin', cursive;
-    width: 100%;
-    padding: 10px;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 30px;
-    background-color: #2b3f2b;
-    color: #fff;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #406142;
-  }
-  
-  p {
-    margin-top: 15px;
-    text-align: center;
-  }
-  label{
-    font-size: 20px;
-    font-weight: bold;
-  }
-  .signup-link,
-  .login-link {
-    margin-bottom: 0;
-  }
-  
-  .signup-link a,
-  .login-link a {
-    color: blue;
-    text-decoration: underline;
-  }
-  
-  .login-form {
-    display: block;
-  }
-  
-  .signup-form {
-    display: none;
-  }
-  #fp{
-    color: black;
-    font-size: 14px;
-    float:right;
-    text-decoration: none;
-    font-weight: 100;
-  }
-  .icons{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-  .icon-btn{
-    border-radius: 50%;
-    width: 50px;
-    font-size: 22px;
-  }
-  /* The alert message box */
-.alert {
+body {
+  font-family: "Mochiy Pop One", sans-serif;
+  font-family: "Pangolin", cursive;
+  background: rgba(47, 75, 75, 0.958420868347339) 4%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  /* margin: 50px 0; */
+}
+
+.container {
+  background-color: #fff;
   padding: 20px;
+  margin: 50px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(54, 38, 38, 0.1);
+  width: 300px;
+  /* position: relative; */
+}
+.container .login-form-email,
+.login-form-password,
+.signup-form-name,
+.signup-form-email,
+.signup-form-otp,
+.signup-form-password {
+  position: relative;
+}
+.show-password {
+  position: absolute;
+  top: 30px;
+  width: 50px;
+  left: 85%;
+  font-size: 23px;
+  background-color: white;
+  color: #0b0c0b;
+}
+#SendOtp {
+  position: absolute;
+  top: 20px;
+  left: 75%;
+  border: none;
+  width: 80px;
+  padding: 3px;
+  background-color: white;
+  color: #0b0c0b;
+  cursor: pointer;
+}
+#SendOtp:hover {
+  color: gray;
+}
+
+.header-container {
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  outline: none;
+  border-bottom: #216625 1px solid;
+  /* border-radius: 3px; */
+  transition: 0.5s ease-in;
+}
+input:focus {
+  border-bottom: #216625 3px solid;
+}
+
+.btn {
+  font-family: "Mochiy Pop One", sans-serif;
+  font-family: "Pangolin", cursive;
+  width: 100%;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 30px;
+  background-color: #2b3f2b;
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #406142;
+}
+
+p {
+  margin-top: 15px;
+  text-align: center;
+}
+label {
+  font-size: 20px;
+  font-weight: bold;
+}
+.signup-link,
+.login-link {
+  margin-bottom: 0;
+}
+
+.signup-link a,
+.login-link a {
+  color: blue;
+  text-decoration: underline;
+}
+
+.login-form {
+  display: none;
+}
+
+.signup-form {
+  display: block;
+}
+
+#fp {
+  color: black;
+  font-size: 14px;
+  float: right;
+  text-decoration: none;
+  font-weight: 100;
+}
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 20px 0;
+}
+.icon {
+  border-radius: 50%;
+  height: 60px;
+}
+.img-btn {
+  border: none;
+  background-color: #fff;
+  padding: 0;
+  cursor: pointer;
+}
+
+.login-error,
+.signup-error {
+  position: relative;
+}
+/* The alert message box */
+.alert {
+  padding: 10px;
   background-color: #f44336; /* Red */
   color: white;
   text-align: center;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   border-radius: 4px;
+  position: absolute;
+  top: 60%;
+  width: 60%;
+  /* left: 20px; */
+  z-index: 1;
 }
 
 /* The close button */
 .closebtn {
-  
   margin-left: 15px;
   color: white;
   font-weight: bold;
@@ -139,5 +179,3 @@ background-size: cover;
 .closebtn:hover {
   color: black;
 }
-
-
