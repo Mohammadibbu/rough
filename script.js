@@ -1,15 +1,4 @@
-// Replace the Firebase configuration with your own project's configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCvSaKQo98k6DSzrG01bLjkOeYoeq4E7DY",
-  authDomain: "water-level-indicator-14606.firebaseapp.com",
-  projectId: "water-level-indicator-14606",
-  databaseURL:
-    "https://water-level-indicator-14606-default-rtdb.firebaseio.com/",
-  storageBucket: "water-level-indicator-14606.appspot.com",
-
-  messagingSenderId: "56987502786",
-  appId: "1:56987502786:web:fdf8ea92b2f14bdec1935b",
-};
+import firebaseConfig from "/source/firebaseinitialization.js";
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -95,16 +84,21 @@ loginForm_btn.addEventListener("click", (e) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(() => {
+    .then((user) => {
       // Login successful, redirect or perform additional actions
       // loginError.innerHTML = "<b style='color:green'>Login Successfully!</b>" ;
+      console.log(JSON.stringify(user));
       loginError.innerHTML = `<div class="alert" style="background-color: #53f877 !important;" >Login Successfully...<i class="fa fa-spinner fa-spin"></i></div>`;
-      localStorage.setItem("Email", email);
-      localStorage.setItem("password", password);
+      localStorage.setItem("user", JSON.stringify(user));
+      // localStorage.setItem("password", password);
 
-      if (localStorage.getItem("Email") == email) {
+      setTimeout(() => {
         location.replace("mainpage.html");
-      }
+      }, 1500);
+
+      // if (localStorage.getItem("Email") == email) {
+      //   location.replace("mainpage.html");
+      // }
       // setTimeout(() => {
       // location.replace("mainpage.html")
 
