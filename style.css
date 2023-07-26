@@ -33,11 +33,11 @@ body {
 }
 .show-password {
   position: absolute;
-  top: 30px;
+  top: 25px;
   width: 50px;
   left: 85%;
   font-size: 23px;
-  background-color: white;
+  background-color: transparent;
   color: #0b0c0b;
 }
 #SendOtp {
@@ -113,11 +113,11 @@ label {
 }
 
 .login-form {
-  display: none;
+  display: block;
 }
 
 .signup-form {
-  display: block;
+  display: none;
 }
 
 #fp {
