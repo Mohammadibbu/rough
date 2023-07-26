@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mainpage</title>
-</head>
-<body style="background-color: aquamarine;">
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+  </head>
+
+  <body style="background-color: aquamarine">
     <h1>WELCOME uSER :)</h1>
+    <div class="logout">
+      <button id="logout">log out</button>
+    </div>
     <script>
-         
-        //   while (true){
-        //     if(localStorage.getItem("Email")==""){
-        //        window.location.replace("index.html")
+      const userAuth = JSON.parse(localStorage.getItem("user"));
+      console.log(userAuth);
+      //ternary if else
+      !userAuth ? location.replace("index.html") : console.log("hi");
+      document.getElementById("logout").addEventListener("click", (e) => {
+        if (confirm("Are you Sure To Logout!")) {
+          localStorage.clear();
 
-        //        break;}
-        //     else{
-        //         console.log("its working")
-        //         break;
-        //     }
-
-        //   }
-
-  
+          location.reload();
+          console.log("cleared");
+        } else {
+          // alert("you cancel the logout Process");
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
