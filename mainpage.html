@@ -4,33 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mainpage</title>
-
+    <link href="style.css" rel="stylesheet" />
+    <!-- firebase CDN -->
     <script
       type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+      src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"
     ></script>
+    <style>
+      .logout {
+        position: relative;
+        top: 0px;
+        left: 20px;
+      }
+    </style>
   </head>
 
-  <body style="background-color: aquamarine">
-    <h1>WELCOME uSER :)</h1>
+  <body style="background-color: rgb(208, 233, 224)">
+    <h2>WELCOME uSER :)</h2>
+    <i id="uname" style="color: green"></i>
     <div class="logout">
-      <button id="logout">log out</button>
+      <button id="logout" class="btn">log out</button>
     </div>
-    <script>
-      const userAuth = JSON.parse(localStorage.getItem("user"));
-      console.log(userAuth);
-      //ternary if else
-      !userAuth ? location.replace("index.html") : console.log("hi");
-      document.getElementById("logout").addEventListener("click", (e) => {
-        if (confirm("Are you Sure To Logout!")) {
-          localStorage.clear();
-
-          location.reload();
-          console.log("cleared");
-        } else {
-          // alert("you cancel the logout Process");
-        }
-      });
-    </script>
+    <script type="text/javascript" src="/source/loginVerification.js"></script>
   </body>
 </html>
