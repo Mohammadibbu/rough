@@ -161,7 +161,7 @@ loginForm_btn.addEventListener("click", (e) => {
       console.log(userdetails.user.email);
       console.log(userdetails.user.emailVerified);
       if (!userdetails.user.emailVerified) {
-        alert("Please verify your email/n otherwise,you will not be able to login");
+        alert("Please verify your email otherwise,you will not be able to login");
 
         if (confirm("if you want to send Email verification...")) {
           sendEmailVerification(auth.currentUser)
