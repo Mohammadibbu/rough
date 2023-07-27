@@ -129,7 +129,7 @@ document.getElementById("google-login").addEventListener("click", (e) => {
     })
     .catch((error) => {
       // Handle Errors here.
-      loginError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>${e.message}</div>`;
+      loginError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>${error.message}</div>`;
 
       console.log(error.code, error.message);
       // const errorCode = error.code;
