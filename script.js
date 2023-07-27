@@ -163,7 +163,7 @@ loginForm_btn.addEventListener("click", (e) => {
       if (!userdetails.user.emailVerified) {
         alert("Please verify your email/n otherwise,you will not be able to login");
 
-        if (confirm("if you want to sent Email verification...")) {
+        if (confirm("if you want to send Email verification...")) {
           sendEmailVerification(auth.currentUser)
             .then(() => {
               alert("Verification Mail Sent Successfully!");
@@ -176,6 +176,7 @@ loginForm_btn.addEventListener("click", (e) => {
             });
         } else {
           console.log("user denied to send verification mail..");
+          alert("If already sent please check your mail id");
         }
       } else {
         loginError.innerHTML = `<div class="alert" style="background-color: #53f877 !important;" >Login Successfully...<i class="fa fa-spinner fa-spin"></i></div>`;
