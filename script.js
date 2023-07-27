@@ -111,7 +111,17 @@ document.getElementById("google-login").addEventListener("click", (e) => {
       // The signed-in user info.
       const user = result.user;
       // console.log(token);
-      localStorage.setItem("userid<@#(1029384756)#@>", user.uid);
+      loginError.innerHTML = `<div class="alert" style="background-color: #53f877 !important;" >Login Successfully...<i class="fa fa-spinner fa-spin"></i></div>`;
+      localStorage.setItem("userid<@#(1029384756)#@>", result.user.uid);
+      localStorage.setItem(
+        "userEmail<@#(0192837465)#@>",
+        JSON.stringify(result.user)
+      );
+
+      setTimeout(() => {
+        location.replace("mainpage.html");
+      }, 1500);
+
       console.log("user details", user.uid);
       console.log("user credential", credential);
       // IdP data available using getAdditionalUserInfo(result)
@@ -119,6 +129,8 @@ document.getElementById("google-login").addEventListener("click", (e) => {
     })
     .catch((error) => {
       // Handle Errors here.
+      loginError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>${e.message}</div>`;
+
       console.log(error.code, error.message);
       // const errorCode = error.code;
       // const errorMessage = error.message;
