@@ -40,20 +40,20 @@ body {
   background-color: transparent;
   color: #0b0c0b;
 }
-#SendOtp {
+/* #SendOtp {
   position: absolute;
   top: 20px;
   left: 75%;
   border: none;
   width: 80px;
   padding: 3px;
-  background-color: white;
+  background-color: transparent;
   color: #0b0c0b;
   cursor: pointer;
 }
 #SendOtp:hover {
   color: gray;
-}
+} */
 
 .header-container {
   text-align: center;
@@ -137,11 +137,16 @@ label {
   border-radius: 50%;
   height: 60px;
 }
+
 .img-btn {
   border: none;
   background-color: #fff;
   padding: 0;
   cursor: pointer;
+}
+.img-btn:hover {
+  background-color: #0d0f0d;
+  border-radius: 50%;
 }
 
 .login-error,
