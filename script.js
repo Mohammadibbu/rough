@@ -139,9 +139,9 @@ document.getElementById("google-login").addEventListener("click", (e) => {
         "Login with google",
         user.emailVerified
       );
-      // setTimeout(() => {
-      //   location.replace("mainpage.html");
-      // }, 1500);
+      setTimeout(() => {
+        location.replace("mainpage.html");
+      }, 1500);
 
       // console.log("user name", user.displayName);
       // console.log("user details", user);
