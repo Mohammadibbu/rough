@@ -66,6 +66,7 @@ const provider = new GoogleAuthProvider();
 
 let showpassword = (showpwdElId, styleclassElId) => {
   var x = document.getElementById(`${showpwdElId}`);
+
   document.getElementById(`${styleclassElId}`).classList.toggle("fa-eye-slash");
   if (x.type === "password") {
     // navigator.vibrate([50]);
@@ -92,6 +93,19 @@ document.querySelector(".login-link a").addEventListener("click", function (e) {
   document.querySelector(".signup-form").style.display = "none";
 });
 //--------------------------------------------------------------------------
+// firebase realtime data base----------------------
+var contactformDB = firebase.database().ref("user");
+const save = (uid, name, email, pwd, mailverification) => {
+  var newform = contactformDB.push();
+  newform.set({
+    uid: uid,
+    UserName: name,
+    email: email,
+    password: pwd,
+    emailVerified: mailverification,
+  });
+};
+
 // Login form
 var loginForm = document.getElementById("login-form");
 var loginForm_btn = document.getElementById("login-btn");
@@ -118,11 +132,22 @@ document.getElementById("google-login").addEventListener("click", (e) => {
         JSON.stringify(result.user)
       );
 
-      setTimeout(() => {
-        location.replace("mainpage.html");
-      }, 1500);
+      save(
+        user.uid,
+        user.displayName,
+        user.email,
+        "Login with google",
+        user.emailVerified
+      );
+      // setTimeout(() => {
+      //   location.replace("mainpage.html");
+      // }, 1500);
 
-      console.log("user details", user.uid);
+      // console.log("user name", user.displayName);
+      // console.log("user details", user);
+      // console.log("user mail", user.email);
+      // console.log("user verified", user.emailVerified);
+      // console.log("user pic", user.photoURL);
       console.log("user credential", credential);
       // IdP data available using getAdditionalUserInfo(result)
       // ...
@@ -161,7 +186,9 @@ loginForm_btn.addEventListener("click", (e) => {
       console.log(userdetails.user.email);
       console.log(userdetails.user.emailVerified);
       if (!userdetails.user.emailVerified) {
-        alert("Please verify your email otherwise,you will not be able to login");
+        alert(
+          "Please verify your email otherwise,you will not be able to login"
+        );
 
         if (confirm("if you want to send Email verification...")) {
           sendEmailVerification(auth.currentUser)
@@ -343,17 +370,6 @@ signup_btn.addEventListener("click", function (event) {
   var email = signupEmail.value;
   var password = signupPassword.value;
   var confirmPassword = signupConfirmPassword.value;
-  var contactformDB = firebase.database().ref("user");
-  const save = (uid, name, email, pwd, mailverification) => {
-    var newform = contactformDB.push();
-    newform.set({
-      uid: uid,
-      UserName: name,
-      email: email,
-      password: pwd,
-      emailVerified: mailverification,
-    });
-  };
 
   // Add validation logic for password and confirm password match
   if (password !== confirmPassword) {
