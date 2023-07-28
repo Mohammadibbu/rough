@@ -32,6 +32,7 @@ body {
   position: relative;
 }
 .show-password {
+  cursor: pointer;
   position: absolute;
   top: 25px;
   width: 50px;
@@ -130,23 +131,31 @@ label {
 .icons {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   margin: 20px 0;
+  border-radius: 30px;
+  border: 1px solid rgb(228, 228, 193);
+}
+.icons:hover {
+  transition-duration: 0.9s;
+  border: 1px solid rgb(73, 73, 32);
 }
 .icon {
   border-radius: 50%;
-  height: 60px;
+  height: 50px;
 }
 
 .img-btn {
   border: none;
   background-color: #fff;
-  padding: 0;
+  /* padding: 10px; */
   cursor: pointer;
+  font-family: "Pangolin", cursive;
+  font-size: 20px;
 }
 .img-btn:hover {
-  background-color: #0d0f0d;
-  border-radius: 50%;
+  transition-duration: 0.9s;
+  font-weight: bold;
 }
 
 .login-error,
