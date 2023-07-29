@@ -158,8 +158,8 @@ label {
   font-weight: bold;
 }
 
-.login-error,
-.signup-error {
+#login-error,
+#signup-error {
   position: relative;
 }
 /* The alert message box */
@@ -171,8 +171,8 @@ label {
   /* margin-bottom: 15px; */
   border-radius: 4px;
   position: absolute;
-  top: 60%;
-  width: 60%;
+  top: 0;
+  width: 100%;
   /* left: 20px; */
   z-index: 1;
 }
@@ -192,4 +192,11 @@ label {
 /* When moving the mouse over the close button */
 .closebtn:hover {
   color: black;
+}
+/* //none and block */
+.d-none {
+  display: none;
+}
+.d-block {
+  display: block;
 }
