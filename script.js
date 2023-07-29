@@ -131,17 +131,32 @@ var loginPassword = document.getElementById("login-password");
 var loginError = document.getElementById("login-error");
 
 //google provider log in--------------------------------
-
+//add Display:None for err message template
+function add_none(WhichELPerformEventListener, whereTOAddclass) {
+  WhichELPerformEventListener.addEventListener("focus", () => {
+    whereTOAddclass.classList.add("d-none");
+  });
+}
+add_none(loginEmail, loginError);
+add_none(loginPassword, loginError);
 document.getElementById("google-login").addEventListener("click", (e) => {
   e.preventDefault();
+  loginError.classList.add("d-none");
+  loginForm_btn.setAttribute("disabled", "true");
+  loginForm_btn.children[0].classList.add("fa-spinner", "fa-spin");
   signInWithPopup(auth, provider)
     .then((result) => {
+      loginForm_btn.children[0].classList.remove("fa-spinner", "fa-spin");
+      loginForm_btn.removeAttribute("disabled");
+      loginError.classList.remove("d-none");
+
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
       // console.log(token);
+
       loginError.innerHTML = `<div class="alert" style="background-color: #53f877 !important;" >Login Successfully...<i class="fa fa-spinner fa-spin"></i></div>`;
       localStorage.setItem("userid<@#(1029384756)#@>", result.user.uid);
       localStorage.setItem(
@@ -171,9 +186,21 @@ document.getElementById("google-login").addEventListener("click", (e) => {
     })
     .catch((error) => {
       // Handle Errors here.
-      loginError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>${error.message}</div>`;
+      loginForm_btn.children[0].classList.remove("fa-spinner", "fa-spin");
+      loginForm_btn.removeAttribute("disabled");
+      loginError.classList.remove("d-none");
+      if (
+        error.code == "auth/popup-closed-by-user" ||
+        error.code == "auth/cancelled-popup-request"
+      ) {
+        loginError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>Something Went Wrong! please try again</div>`;
+      } else if (error.code == "auth/popup-blocked") {
+        loginError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>Your Browser may Block the Pop-up</div>`;
+      } else {
+        loginError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>${error.message}</div>`;
+      }
 
-      console.log(error.code, error.message);
+      console.log(error.code);
       // const errorCode = error.code;
       // const errorMessage = error.message;
       // The email of the user's account used.
@@ -187,6 +214,8 @@ document.getElementById("google-login").addEventListener("click", (e) => {
 //perform login form action
 loginForm_btn.addEventListener("click", (e) => {
   e.preventDefault();
+  loginError.classList.remove("d-none");
+
   loginForm_btn.setAttribute("disabled", "true");
   loginForm_btn.children[0].classList.add("fa-spinner", "fa-spin");
   let email = loginEmail.value;
@@ -376,10 +405,15 @@ var signupPassword = document.getElementById("signup-pwd");
 var signupConfirmPassword = document.getElementById("confirm-password");
 var signupError = document.getElementById("signup-error");
 let signup_btn = document.getElementById("signup_btn");
+add_none(signupName, signupError);
+add_none(signupEmail, signupError);
+add_none(signupPassword, signupError);
+add_none(signupConfirmPassword, signupError);
 
 // signup process done here...
 signup_btn.addEventListener("click", function (event) {
   event.preventDefault();
+  signupError.classList.remove("d-none");
   signup_btn.setAttribute("disabled", "true");
   signup_btn.children[0].classList.add("fa-spinner", "fa-spin");
   // store data in firebase database...............
@@ -442,13 +476,7 @@ signup_btn.addEventListener("click", function (event) {
           password,
           userdetails.user.emailVerified
         );
-        saving(
-          userdetails.user.uid,
-          name,
-          userdetails.user.email,
-          password,
-          userdetails.user.emailVerified
-        );
+
         signupError.innerHTML = `<div class="alert" style="background-color: green !important;" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>sign up successfully</div>`;
         setTimeout(() => {
           signupForm.reset();
