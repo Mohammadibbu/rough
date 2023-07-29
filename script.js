@@ -15,7 +15,7 @@ import {
   child,
   update,
   remove,
-} from "/source/firebaseinitialization.js";
+} from "source/firebaseinitialization.js";
 //firebase auth init
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
