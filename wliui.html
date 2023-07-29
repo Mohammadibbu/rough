@@ -46,9 +46,17 @@
         bottom: 0;
         left: 0;
         transition: height 1s ease;
-        animation: waveAnimation 5s ease infinite;
+        animation: animate 5s linear infinite;
       }
 
+@keyframes animate {
+	0% {
+		transform: translate(-50%, -75%) rotate(0deg);
+	}
+	100% {
+		transform: translate(-50%, -75%) rotate(360deg);
+	}
+}
       @keyframes waveAnimation {
         0% {
           transform: translateY(0%);
