@@ -42,7 +42,7 @@ db.on("value", (snapshot) => {
 
     location.replace("index.html");
   } else {
-    userAuthEmailerified == false
+    userAuthEmailerified == true
       ? firebase
           .database()
           .ref("users/" + userAuthUid)
