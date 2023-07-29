@@ -30,7 +30,6 @@
       <!-- <img src="img.png" alt="img" id="img"> -->
 
       <form class="login-form" id="login-form">
-        <div id="login-error"></div>
         <div class="header-container"><h1>Login</h1></div>
         <div class="login-form-email">
           <span style="color: red">*</span
@@ -63,6 +62,9 @@
         <button type="submit" id="login-btn" class="btn">
           Login <i class="fa"></i>
         </button>
+        <!-- error-message -->
+        <div id="login-error" class="d-none"></div>
+
         <span style="color: rgb(121, 121, 69)">____________OR___________</span>
 
         <div class="icons">
@@ -76,11 +78,6 @@
 
       <!-- -----------signup form----------------------------------- -->
       <form class="signup-form" id="signup-form">
-        <div
-          id="signup-error"
-          style="text-align: center"
-          class="error-message"
-        ></div>
         <div class="header-content"><h1>Sign Up</h1></div>
         <div class="signup-form-name">
           <span style="color: red">*</span><label for="signup-name">Name</label
@@ -139,6 +136,8 @@
         <button type="submit" id="signup_btn" class="btn">
           Sign Up<i class="fa"></i>
         </button>
+        <!-- error-message for signup -->
+        <div id="signup-error" style="text-align: center" class="d-none"></div>
         <!-- <span style="color: rgb(121, 121, 69)"
           >_____________OR_____________</span
         >
