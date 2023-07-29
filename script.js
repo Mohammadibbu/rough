@@ -1,30 +1,22 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+//  Firebase configuration with project's configuration
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  signInWithPopup,
   GoogleAuthProvider,
   signInWithRedirect,
-  signInWithPopup,
-} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
-// import { getDatabase } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
-//  Firebase configuration with project's configuration
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCvSaKQo98k6DSzrG01bLjkOeYoeq4E7DY",
-  authDomain: "water-level-indicator-14606.firebaseapp.com",
-  projectId: "water-level-indicator-14606",
-  databaseURL:
-    "https://water-level-indicator-14606-default-rtdb.firebaseio.com/",
-  storageBucket: "water-level-indicator-14606.appspot.com",
-
-  messagingSenderId: "56987502786",
-  appId: "1:56987502786:web:fdf8ea92b2f14bdec1935b",
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const app = initializeApp(firebaseConfig);
+  //database
+  connectDB,
+  ref,
+  get,
+  set,
+  child,
+  update,
+  remove,
+} from "/source/firebaseinitialization.js";
+//firebase auth init
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 // window.onload=()=>{
@@ -94,18 +86,43 @@ document.querySelector(".login-link a").addEventListener("click", function (e) {
 });
 //--------------------------------------------------------------------------
 // firebase realtime data base----------------------
-var contactformDB = firebase.database().ref("user");
+
 const save = (uid, name, email, pwd, mailverification) => {
-  var newform = contactformDB.push();
-  newform.set({
+  set(ref(connectDB, "users/" + uid), {
     uid: uid,
     UserName: name,
     email: email,
     password: pwd,
     emailVerified: mailverification,
-  });
+  })
+    .then(() => {
+      console.log("successfully sent sugn up data");
+    })
+    .catch((e) => {
+      console.log("un success", e);
+    });
 };
 
+// save("3", "ivbd", "@gmail.nxisj", "whfyew", false);
+// const select = (uid) => {
+//   let dbref = firebase.database();
+
+//   getAuth(child(ref(dbref, "users/" + uid)))
+//     .then((snapshot) => {
+//       if (snapshot.exist()) {
+//         console.log("data selected ");
+//       } else {
+//         console.log("no data found ");
+//       }
+//     })
+//     .catch((e) => {
+//       console.log(e);
+//     });
+//   // console.log(e);
+// };
+// select("1");
+
+// ------------------------------------------------------------
 // Login form
 var loginForm = document.getElementById("login-form");
 var loginForm_btn = document.getElementById("login-btn");
@@ -419,6 +436,13 @@ signup_btn.addEventListener("click", function (event) {
             console.log("error occur in signup verification mail", e);
           });
         save(
+          userdetails.user.uid,
+          name,
+          userdetails.user.email,
+          password,
+          userdetails.user.emailVerified
+        );
+        saving(
           userdetails.user.uid,
           name,
           userdetails.user.email,
