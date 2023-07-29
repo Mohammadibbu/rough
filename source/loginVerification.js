@@ -16,8 +16,11 @@ var userAuthUid = localStorage.getItem("userid<@#(1029384756)#@>");
 var userAuthEmail = JSON.parse(
   localStorage.getItem("userEmail<@#(0192837465)#@>")
 ).email;
+var userAuthEmailerified = JSON.parse(
+  localStorage.getItem("userEmail<@#(0192837465)#@>")
+).emailVerified;
 // user verification
-const db = firebase.database().ref("user");
+const db = firebase.database().ref("users");
 db.on("value", (snapshot) => {
   var i = 1;
   var useridverify = [];
@@ -31,15 +34,34 @@ db.on("value", (snapshot) => {
     i++;
     // console.log(key)
   });
+
   console.log(useridverify);
   console.log(useridverify.includes(userAuthUid));
   if (!useridverify.includes(userAuthUid)) {
     console.log("no data avail");
+
     location.replace("index.html");
   } else {
+    userAuthEmailerified == false
+      ? firebase
+          .database()
+          .ref("users/" + userAuthUid)
+          .update({
+            emailVerified: "true",
+          })
+          .then(() => {
+            console.log("send verified");
+          })
+          .catch((e) => {
+            alert(e);
+          })
+      : console.log("email verified true");
+
     console.log(" data avail");
   }
 });
+
+console.log(JSON.parse(localStorage.getItem("userEmail<@#(0192837465)#@>")));
 
 // console.log(userAuth);
 
