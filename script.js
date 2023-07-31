@@ -87,16 +87,17 @@ document.querySelector(".login-link a").addEventListener("click", function (e) {
 //--------------------------------------------------------------------------
 // firebase realtime data base----------------------
 
-const save = (uid, name, email, pwd, mailverification) => {
+const save = (uid, name, email, pwd, mailverification, loginValue) => {
   set(ref(connectDB, "users/" + uid), {
     uid: uid,
     UserName: name,
     email: email,
     password: pwd,
     emailVerified: mailverification,
+    UserLoggedIn: loginValue,
   })
     .then(() => {
-      console.log("successfully sent sugn up data");
+      console.log("successfully sent sign up data");
     })
     .catch((e) => {
       console.log("un success", e);
@@ -129,7 +130,7 @@ var loginForm_btn = document.getElementById("login-btn");
 var loginEmail = document.getElementById("login-email");
 var loginPassword = document.getElementById("login-password");
 var loginError = document.getElementById("login-error");
-
+var LoginWithGoogle = document.getElementById("google-login");
 //google provider log in--------------------------------
 //add Display:None for err message template
 function add_none(WhichELPerformEventListener, whereTOAddclass) {
@@ -137,17 +138,48 @@ function add_none(WhichELPerformEventListener, whereTOAddclass) {
     whereTOAddclass.classList.add("d-none");
   });
 }
+//button disable and enable Code Here.....----------------
+function btnDisableOrEnable(Element) {
+  if (!Element.hasAttribute("disabled")) {
+    Element.setAttribute("disabled", "true");
+    Element.style.cursor = "not-allowed";
+  } else {
+    Element.removeAttribute("disabled");
+    Element.style.removeProperty("cursor");
+  }
+}
+
+//funtion setEmail verify
+function setEmailVerify(data, refid) {
+  //update data emailverified==true....
+  !data.emailVerified == true
+    ? update(child(ref(connectDB), "users/" + refid), {
+        emailVerified: true,
+      })
+        .then(() => {
+          console.log("send verified");
+        })
+        .catch((e) => {
+          alert(e);
+        })
+    : console.log("mailid already verified true");
+}
+// ---------------------------------------------------------
 add_none(loginEmail, loginError);
 add_none(loginPassword, loginError);
-document.getElementById("google-login").addEventListener("click", (e) => {
+//login with google......
+LoginWithGoogle.addEventListener("click", (e) => {
   e.preventDefault();
   loginError.classList.add("d-none");
-  loginForm_btn.setAttribute("disabled", "true");
+  //when click the button BUtton will disabled
+  btnDisableOrEnable(loginForm_btn);
+  btnDisableOrEnable(LoginWithGoogle);
   loginForm_btn.children[0].classList.add("fa-spinner", "fa-spin");
   signInWithPopup(auth, provider)
     .then((result) => {
       loginForm_btn.children[0].classList.remove("fa-spinner", "fa-spin");
-      loginForm_btn.removeAttribute("disabled");
+      btnDisableOrEnable(loginForm_btn);
+      btnDisableOrEnable(LoginWithGoogle);
       loginError.classList.remove("d-none");
 
       // This gives you a Google Access Token. You can use it to access the Google API.
@@ -169,7 +201,8 @@ document.getElementById("google-login").addEventListener("click", (e) => {
         user.displayName,
         user.email,
         "Login with google",
-        user.emailVerified
+        user.emailVerified,
+        true
       );
       setTimeout(() => {
         location.replace("mainpage.html");
@@ -186,8 +219,9 @@ document.getElementById("google-login").addEventListener("click", (e) => {
     })
     .catch((error) => {
       // Handle Errors here.
+      btnDisableOrEnable(loginForm_btn);
+      btnDisableOrEnable(LoginWithGoogle);
       loginForm_btn.children[0].classList.remove("fa-spinner", "fa-spin");
-      loginForm_btn.removeAttribute("disabled");
       loginError.classList.remove("d-none");
       if (
         error.code == "auth/popup-closed-by-user" ||
@@ -215,8 +249,8 @@ document.getElementById("google-login").addEventListener("click", (e) => {
 loginForm_btn.addEventListener("click", (e) => {
   e.preventDefault();
   loginError.classList.remove("d-none");
-
-  loginForm_btn.setAttribute("disabled", "true");
+  btnDisableOrEnable(loginForm_btn);
+  btnDisableOrEnable(LoginWithGoogle);
   loginForm_btn.children[0].classList.add("fa-spinner", "fa-spin");
   let email = loginEmail.value;
   let password = loginPassword.value;
@@ -224,13 +258,14 @@ loginForm_btn.addEventListener("click", (e) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userdetails) => {
       loginForm_btn.children[0].classList.remove("fa-spinner", "fa-spin");
-      loginForm_btn.removeAttribute("disabled");
-      // console.log("new", auth.currentUser);
+      btnDisableOrEnable(loginForm_btn);
+      btnDisableOrEnable(LoginWithGoogle);
+      console.log("new", auth.currentUser);
       // loginError.innerHTML = "<b style='color:green'>Login Successfully!</b>" ;
       // console.log(JSON.stringify(user));
-      console.log(userdetails);
-      console.log(userdetails.user.email);
-      console.log(userdetails.user.emailVerified);
+      // console.log(userdetails);
+      // console.log(userdetails.user.email);
+      // console.log(userdetails.user.emailVerified);
       if (!userdetails.user.emailVerified) {
         alert(
           "Please verify your email otherwise,you will not be able to login"
@@ -258,16 +293,35 @@ loginForm_btn.addEventListener("click", (e) => {
           "userEmail<@#(0192837465)#@>",
           JSON.stringify(userdetails.user)
         );
-
-        setTimeout(() => {
-          location.replace("mainpage.html");
-        }, 1500);
+        //set mail verified
+        get(child(ref(connectDB), "users/" + userdetails.user.uid))
+          .then((snapshot) => {
+            let data = snapshot.val();
+            setEmailVerify(data, userdetails.user.uid);
+          })
+          .catch((e) => {
+            console.log("error while fetching data", e);
+          });
+        //Login auth userLogged in or not
+        update(child(ref(connectDB), "users/" + userdetails.user.uid), {
+          UserLoggedIn: true,
+        })
+          .then(() => {
+            console.log("login");
+          })
+          .catch((e) => {
+            alert(e);
+          });
+        //   setTimeout(() => {
+        //     location.replace("mainpage.html");
+        //   }, 1500);
       }
     })
     .catch((e) => {
       // Handle login errors
       loginForm_btn.children[0].classList.remove("fa-spinner", "fa-spin");
-      loginForm_btn.removeAttribute("disabled");
+      btnDisableOrEnable(loginForm_btn);
+      btnDisableOrEnable(LoginWithGoogle);
 
       console.log(e);
       if (email === "" || password === "") {
@@ -313,47 +367,7 @@ signUpConfirmShowpwd.addEventListener("click", (e) => {
   e.preventDefault();
   showpassword("confirm-password", "eye-3");
 });
-// ------------------------------------------------------------>>?
-
-// document.getElementById("login-email").addEventListener("focus", (e) => {
-//   document.getElementById("login-email").removeAttribute("placeholder");
-// });
-// document.getElementById("login-email").addEventListener("blur", (e) => {
-//   document
-//     .getElementById("login-email")
-//     .setAttribute("placeholder", "example321@gmail.com");
-// });
-// document.getElementById("login-password").addEventListener("focus", (e) => {
-//   document.getElementById("login-password").removeAttribute("placeholder");
-// });
-// document.getElementById("login-password").addEventListener("blur", (e) => {
-//   document
-//     .getElementById("login-password")
-//     .setAttribute("placeholder", "*******");
-// });
-//email.js
-// function sendOtp(mail, otp) {
-//   var params = {
-//     ToEmail: mail,
-//     message: otp,
-//   };
-
-//   // console.log(params);
-//   emailjs
-//     .send("service_0qguk7m", "template_q8tiidj", params, "Wv2X6C6WGZ-K-YYKL")
-//     .then(
-//       function (response) {
-//         console.log("SUCCESS!", response.status, response.text);
-//       },
-//       function (error) {
-//         if (error.status == 422) {
-//           alert("Please enter the mail id");
-//         }
-//         console.log("FAILED...", error);
-//       }
-//     );
-// }
-// -----------------------------------------
+// ------------------------------------------------------------
 
 // function SendOTPMail(mail) {
 //   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
@@ -414,7 +428,8 @@ add_none(signupConfirmPassword, signupError);
 signup_btn.addEventListener("click", function (event) {
   event.preventDefault();
   signupError.classList.remove("d-none");
-  signup_btn.setAttribute("disabled", "true");
+  btnDisableOrEnable(signup_btn);
+
   signup_btn.children[0].classList.add("fa-spinner", "fa-spin");
   // store data in firebase database...............
   var name = signupName.value;
@@ -426,7 +441,7 @@ signup_btn.addEventListener("click", function (event) {
   if (password !== confirmPassword) {
     signupError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>password do not match</div>`;
     signup_btn.children[0].classList.remove("fa-spinner", "fa-spin");
-    signup_btn.removeAttribute("disabled");
+    btnDisableOrEnable(signup_btn);
 
     setTimeout(() => {
       signupError.innerHTML = "";
@@ -438,7 +453,7 @@ signup_btn.addEventListener("click", function (event) {
     password === ""
   ) {
     signup_btn.children[0].classList.remove("fa-spinner", "fa-spin");
-    signup_btn.removeAttribute("disabled");
+    btnDisableOrEnable(signup_btn);
 
     signupError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>*Please fill all Required fields</div>`;
     setTimeout(() => {
@@ -458,7 +473,7 @@ signup_btn.addEventListener("click", function (event) {
       .then((userdetails) => {
         // Sign up successful, redirect or perform additional actions
         signup_btn.children[0].classList.remove("fa-spinner", "fa-spin");
-        signup_btn.removeAttribute("disabled");
+        btnDisableOrEnable(signup_btn);
 
         console.log(userdetails.user.email);
         console.log(auth.currentUser);
@@ -474,7 +489,8 @@ signup_btn.addEventListener("click", function (event) {
           name,
           userdetails.user.email,
           password,
-          userdetails.user.emailVerified
+          userdetails.user.emailVerified,
+          false
         );
 
         signupError.innerHTML = `<div class="alert" style="background-color: green !important;" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>sign up successfully</div>`;
@@ -490,7 +506,7 @@ signup_btn.addEventListener("click", function (event) {
         // Handle sign up errors
         console.log(e);
         signup_btn.children[0].classList.remove("fa-spinner", "fa-spin");
-        signup_btn.removeAttribute("disabled");
+        btnDisableOrEnable(signup_btn);
 
         if (e.code === "auth/network-request-failed") {
           loginError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>Login Failed Due to Network Issue</div>`;
