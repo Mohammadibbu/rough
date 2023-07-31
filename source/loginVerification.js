@@ -61,10 +61,11 @@ document.getElementById("logout").addEventListener("click", (e) => {
       UserLoggedIn: false,
     })
       .then(() => {
+        location.replace("index.html");
         console.log("logged out");
       })
       .catch((e) => {
-        alert(e);
+        alert("something Went Wrong\nplease Try Again\nERROR:", e.code);
       });
   } else {
     // alert("you cancel the logout Process");
