@@ -17,9 +17,19 @@
         left: 20px;
       }
     </style>
+    <script>
+      function noBack() {
+        window.history.forward();
+      }
+    </script>
   </head>
 
-  <body style="background-color: rgb(208, 233, 224)">
+  <body
+    style="background-color: rgb(208, 233, 224)"
+    onLoad="noBack();"
+    onpageshow="if (event.persisted) noBack();"
+    onUnload=""
+  >
     <h2>WELCOME uSER :)</h2>
     <i id="uname" style="color: green"></i>
     <div class="logout">
