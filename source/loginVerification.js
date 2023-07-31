@@ -57,7 +57,7 @@ document.getElementById("logout").addEventListener("click", (e) => {
     // localStorage.removeItem("userid<@#(1029384756)#@>");
     // location.replace("index.html");
     console.log("cleared");
-    update(child(ref(connectDB), "users/" + userAuthEmailerified.uid), {
+    update(child(ref(connectDB), "users/" + userAuthExtra.uid), {
       UserLoggedIn: false,
     })
       .then(() => {
