@@ -312,9 +312,9 @@ loginForm_btn.addEventListener("click", (e) => {
           .catch((e) => {
             alert(e);
           });
-        //   setTimeout(() => {
-        //     location.replace("mainpage.html");
-        //   }, 1500);
+        setTimeout(() => {
+          location.replace("mainpage.html");
+        }, 1500);
       }
     })
     .catch((e) => {
