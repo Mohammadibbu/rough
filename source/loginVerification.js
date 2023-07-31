@@ -16,6 +16,7 @@ const userAuthExtra = JSON.parse(
 );
 // console.log(userAuthEmailerified.emailVerified);
 const reference = ref(connectDB);
+
 // get Data and Check Login Verification---------------
 function verifyUser(data) {
   if (data) {
@@ -51,8 +52,7 @@ get(child(reference, "users/" + userAuthUid))
 // console.log(JSON.parse(localStorage.getItem("userEmail<@#(0192837465)#@>")));
 
 // ternary if else
-
-document.getElementById("logout").addEventListener("click", (e) => {
+function logout() {
   if (confirm("Are you Sure To Logout!")) {
     // localStorage.removeItem("userid<@#(1029384756)#@>");
     // location.replace("index.html");
@@ -70,5 +70,6 @@ document.getElementById("logout").addEventListener("click", (e) => {
   } else {
     // alert("you cancel the logout Process");
   }
-});
+}
+document.getElementById("logout").addEventListener("click", logout);
 // console.log(userAuthEmail);
