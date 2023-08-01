@@ -3,12 +3,41 @@
   font-family: "Mochiy Pop One", sans-serif;
   font-family: "Pangolin", cursive;
 }
+body {
+  margin: 0;
+  padding: 0;
+}
+nav {
+  background-color: #2b3f2b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+nav > h2 {
+  color: aliceblue;
+}
+nav > i {
+  background-color: antiquewhite;
+  border-radius: 3px;
+  padding: 4px;
+}
 .logout {
   position: relative;
-  top: 40px;
-  left: 0px;
+  left: 30px;
 }
-
+.btn {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  background-color: aqua;
+}
+.btn:hover {
+  cursor: pointer;
+  border: 1px solid gray;
+}
 .overlay {
   position: fixed;
   top: 0;
