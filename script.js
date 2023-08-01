@@ -19,7 +19,10 @@ import {
 //firebase auth init
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
-// window.onload=()=>{
+window.onload = () => {
+  sessionStorage.removeItem("userid<@#(1029384756)#@>");
+  sessionStorage.removeItem("userEmail<@#(0192837465)#@>");
+};
 //   render();
 // }
 // function render(){
@@ -68,7 +71,8 @@ let showpassword = (showpwdElId, styleclassElId) => {
     x.type = "password";
   }
 };
-
+//clear all session storage
+// window.onload = ;
 //---------------------showpassword template------------------------------------
 //---------------------switch signup and login form------------
 document
@@ -190,12 +194,17 @@ LoginWithGoogle.addEventListener("click", (e) => {
       // console.log(token);
 
       loginError.innerHTML = `<div class="alert" style="background-color: #53f877 !important;" >Login Successfully...<i class="fa fa-spinner fa-spin"></i></div>`;
-      localStorage.setItem("userid<@#(1029384756)#@>", result.user.uid);
-      localStorage.setItem(
+      // localStorage.setItem("userid<@#(1029384756)#@>", result.user.uid);
+      // localStorage.setItem(
+      //   "userEmail<@#(0192837465)#@>",
+      //   JSON.stringify(result.user)
+      // );
+      sessionStorage.setItem("userid<@#(1029384756)#@>", result.user.uid);
+      sessionStorage.setItem(
         "userEmail<@#(0192837465)#@>",
         JSON.stringify(result.user)
       );
-
+      // sessionStorage.setItem("LOgiN#@$%^&;;", true);
       save(
         user.uid,
         user.displayName,
@@ -261,7 +270,6 @@ loginForm_btn.addEventListener("click", (e) => {
       btnDisableOrEnable(loginForm_btn);
       btnDisableOrEnable(LoginWithGoogle);
       console.log("new", auth.currentUser);
-      // loginError.innerHTML = "<b style='color:green'>Login Successfully!</b>" ;
       // console.log(JSON.stringify(user));
       // console.log(userdetails);
       // console.log(userdetails.user.email);
@@ -270,8 +278,13 @@ loginForm_btn.addEventListener("click", (e) => {
         alert(
           "Please verify your email otherwise,you will not be able to login"
         );
-
-        if (confirm("if you want to send Email verification...")) {
+        console.log(userdetails.user.email);
+        if (
+          confirm(
+            "if you want to send mail verification for\n" +
+              userdetails.user.email
+          )
+        ) {
           sendEmailVerification(auth.currentUser)
             .then(() => {
               alert("Verification Mail Sent Successfully!");
@@ -283,16 +296,26 @@ loginForm_btn.addEventListener("click", (e) => {
               );
             });
         } else {
-          console.log("user denied to send verification mail..");
+          console.log("user denied to send  mail verification..");
           alert("If already sent please check your mail id");
         }
       } else {
         loginError.innerHTML = `<div class="alert" style="background-color: #53f877 !important;" >Login Successfully...<i class="fa fa-spinner fa-spin"></i></div>`;
-        localStorage.setItem("userid<@#(1029384756)#@>", userdetails.user.uid);
-        localStorage.setItem(
+        // localStorage.setItem("userid<@#(1029384756)#@>", userdetails.user.uid);
+        // localStorage.setItem(
+        //   "userEmail<@#(0192837465)#@>",
+        //   JSON.stringify(userdetails.user)
+        // );
+        sessionStorage.setItem(
+          "userid<@#(1029384756)#@>",
+          userdetails.user.uid
+        );
+        sessionStorage.setItem(
           "userEmail<@#(0192837465)#@>",
           JSON.stringify(userdetails.user)
         );
+        sessionStorage.setItem("LOgiN#@$%^&;;", true);
+
         //set mail verified
         get(child(ref(connectDB), "users/" + userdetails.user.uid))
           .then((snapshot) => {
