@@ -1,0 +1,225 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+  margin-bottom: 100px;
+}
+
+.water-tank {
+  width: 300px;
+  height: 400px;
+  background-color: #e3e9c8;
+
+  border: 3px solid #333;
+  border-radius: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.top {
+  border: 2px solid black;
+  position: absolute;
+  width: 47%;
+  height: 6%;
+  top: 16%;
+  border-radius: 10px;
+  background-color: #d5ff1a;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 1;
+}
+.water {
+  width: 100%;
+  background-color: #007bff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: height 2s ease;
+  animation: waveAnimation 5s linear infinite;
+}
+
+@keyframes waveAnimation {
+  0% {
+    transform: translateY(0%);
+  }
+  20% {
+    transform: translateY(5%);
+  }
+  30% {
+    transform: translateY(0%);
+  }
+  40% {
+    transform: translateY(5%);
+  }
+  50% {
+    transform: translateY(0%);
+  }
+  70% {
+    transform: translateY(5%);
+  }
+  90% {
+    transform: translateY(3%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+.txt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.tank {
+  position: relative;
+  padding-top: 100px;
+}
+.layer1 {
+  position: absolute;
+  background: rgba(213, 255, 26, 0.5);
+  backdrop-filter: blur(0.5px);
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  z-index: 1;
+}
+.layer2 {
+  position: absolute;
+  background: rgba(213, 255, 26, 0.5);
+  backdrop-filter: blur(0.5px);
+
+  top: 140px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  z-index: 1;
+}
+.layer3 {
+  position: absolute;
+  background: rgba(213, 255, 26, 0.5);
+  backdrop-filter: blur(0.5px);
+  z-index: 1;
+
+  top: 240px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+}
+.layer4 {
+  position: absolute;
+  background: rgba(213, 255, 26, 0.5);
+  backdrop-filter: blur(0.5px);
+  z-index: 1;
+
+  top: 340px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+}
+/* .waterwave {
+    position: absolute;
+    background-color: red;
+    padding-top: 20px;
+    width: inherit;
+   
+  } */
+/* Styles for the toggle button */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide the default checkbox */
+.toggle input {
+  display: none;
+}
+
+/* Style the slider */
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+/* Change the slider color when the toggle is on */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2086207a;
+  /* Adjust the opacity (4th value) to control dimness */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Make sure the overlay appears above other elements */
+}
+
+.loader {
+  border: 5px solid #ffffff; /* Light gray border for the loader */
+  border-top: 5px solid #000;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite; /* Apply the spinning animation */
+}
+.overlay::after {
+  content: "Fetching data...";
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(12, 9, 9);
+  font-size: 30px;
+  font-weight: bold;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* //none and block */
+.d-none {
+  display: none;
+}
+.d-block {
+  display: block;
+}
