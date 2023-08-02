@@ -14,6 +14,8 @@ nav {
   align-items: center;
   position: sticky;
   top: 0;
+
+  z-index: 999;
 }
 nav > h2 {
   color: aliceblue;
