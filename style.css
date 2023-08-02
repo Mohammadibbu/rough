@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Pangolin&display=swap");
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /*#2b3f2b*/
 }
-
+:root {
+  --default-color: #2b3f2b;
+}
 body {
   font-family: "Mochiy Pop One", sans-serif;
   font-family: "Pangolin", cursive;
@@ -82,7 +84,7 @@ input:focus {
   font-weight: bold;
   font-size: 20px;
   border-radius: 30px;
-  background-color: #2b3f2b;
+  background-color: var(--default-color);
   color: #fff;
   margin-top: 20px;
   margin-bottom: 20px;
