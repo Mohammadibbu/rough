@@ -8,6 +8,38 @@ body {
   background-color: #f0f0f0;
   margin-bottom: 100px;
 }
+/* Reset default button styles */
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  outline: none;
+}
+.power-button i {
+  background: -webkit-linear-gradient(#f80c0c, #3df32d);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 40px;
+}
+.power-button {
+  width: 70px;
+  height: 70px;
+  border: 3px solid gray;
+  border-radius: 50%;
+  position: relative;
+  background-color: rgb(236, 228, 228);
+  transition: border 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.power-button.on {
+  border: 3px solid rgb(27, 228, 54);
+}
 
 .water-tank {
   width: 300px;
