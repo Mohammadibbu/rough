@@ -196,14 +196,13 @@ LoginWithGoogle.addEventListener("click", (e) => {
       // console.log(token);
      update(ref(connectDB, "users/" + user.uid), {
      uid: user.uid,
-    UserName: user.name,
+    UserName: user.displayName,
     email: user.email,
     password: "login with Google",
     emailVerified: user.emailVerified,
     UserLoggedIn: true,
   })
     .then(() => {
-      location.replace(`../rough/waterlevelUI/${data.ui}ui.html`);
       console.log("logged out");
       // localStorage.removeItem("userid<@#(1029384756)#@>");
       // localStorage.removeItem("userEmail<@#(0192837465)#@>");
