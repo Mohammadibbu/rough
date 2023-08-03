@@ -12,10 +12,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: sticky;
-  top: 0;
-
-  z-index: 999;
+  flex-wrap: wrap;
 }
 nav > h2 {
   color: aliceblue;
@@ -24,17 +21,27 @@ nav > i {
   background-color: antiquewhite;
   border-radius: 3px;
   padding: 4px;
+  margin-bottom: 20px;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px;
+  padding: 10px;
 }
 .logout {
-  position: relative;
-  left: 30px;
+  margin-top: 40px;
+  color: antiquewhite;
 }
 .btn {
   padding: 10px;
   border: none;
   border-radius: 10px;
   font-size: 18px;
-  background-color: aqua;
+  color: #ffffff;
+  background-color: rgb(31, 59, 59);
 }
 .btn:hover {
   cursor: pointer;
