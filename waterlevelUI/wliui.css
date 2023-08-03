@@ -1,12 +1,27 @@
 body {
+  margin: 0;
+  background-color: #f0f0f0;
+  margin-bottom: 100px;
+}
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  background-color: #f0f0f0;
-  margin-bottom: 100px;
+}
+.actions {
+  /* background-color: #ca191936; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30px;
+}
+.product-details {
+  background-color: #3df32d;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 30px;
 }
 /* Reset default button styles */
 button {
@@ -61,7 +76,6 @@ button {
   background-color: #d5ff1a;
   left: 50%;
   transform: translate(-50%, -50%);
-
   z-index: 1;
 }
 .water {
@@ -73,7 +87,16 @@ button {
   transition: height 2s ease;
   animation: waveAnimation 5s linear infinite;
 }
-
+.btn {
+  font-size: large;
+  background-color: #bccf66;
+  padding: 13px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+.btn:hover {
+  border-bottom: 2px #000 solid;
+}
 @keyframes waveAnimation {
   0% {
     transform: translateY(0%);
