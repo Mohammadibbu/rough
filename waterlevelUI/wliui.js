@@ -56,6 +56,31 @@ function updatingWorkingmode(AutoOrManual, manualbtnstatus) {
       console.log("something Went Wrong\nplease Try Again\nERROR:", e.code);
     });
 }
+
+//logout
+function logout(userAuthExtra) {
+  if (confirm("Are you Sure To Logout !\n  " + userAuthExtra.email)) {
+    console.log("cleared");
+    update(child(ref(connectDB), "users/" + userAuthExtra.uid), {
+      UserLoggedIn: false,
+    })
+      .then(() => {
+        location.replace("../index.html");
+        console.log("logged out");
+        // localStorage.removeItem("userid<@#(1029384756)#@>");
+        // localStorage.removeItem("userEmail<@#(0192837465)#@>");
+        sessionStorage.removeItem("userid<@#(1029384756)#@>");
+        sessionStorage.removeItem("userEmail<@#(0192837465)#@>");
+        sessionStorage.removeItem("LOgiN#@$%^&;;");
+      })
+      .catch((e) => {
+        alert("something Went Wrong\nplease Try Again\nERROR:", e.code);
+      });
+  } else {
+    // alert("you cancel the logout Process");
+    return;
+  }
+}
 ///////////////////////////////////////////////////////////////////////////////
 //-----------------------END  functions------------------------------------
 
@@ -64,6 +89,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const userAuthExtra = JSON.parse(
     sessionStorage.getItem("userEmail<@#(0192837465)#@>")
   );
+  //logout btn
+  document.getElementById("logout").addEventListener("click", () => {
+    logout(userAuthExtra);
+  });
+
   if (userAuthUid !== null || userAuthExtra !== null) {
     if (userAuthUid == userAuthExtra.uid) {
       get(child(ref(connectDB), "users/" + userAuthUid))
@@ -72,6 +102,9 @@ document.addEventListener("DOMContentLoaded", function () {
           productid = dataL.Regproductid;
           console.log(dataL.Regproductid);
           productData();
+          document.getElementById(
+            "pid"
+          ).innerHTML = `<h2 class="product-details" >product id:<i style="color:blue;">${productid}</i></h2>`;
           initialLoader.classList.add("d-none");
         })
         .catch((e) => {
