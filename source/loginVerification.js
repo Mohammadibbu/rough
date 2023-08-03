@@ -45,7 +45,9 @@ function verifyUser(data) {
 // console.log(JSON.parse(localStorage.getItem("userEmail<@#(0192837465)#@>")));
 
 function logout() {
+  navigator.vibrate([100]);
   if (confirm("Are you Sure To Logout!")) {
+    navigator.vibrate([50]);
     console.log("cleared");
     update(child(ref(connectDB), "users/" + userAuthExtra.uid), {
       UserLoggedIn: false,
@@ -63,6 +65,7 @@ function logout() {
         alert("something Went Wrong\nplease Try Again\nERROR:", e.code);
       });
   } else {
+    navigator.vibrate([50]);
     // alert("you cancel the logout Process");
     return;
   }
@@ -97,6 +100,7 @@ function uicheck(productid, data) {
     });
 }
 function productCheck() {
+  navigator.vibrate([100]);
   let productid = prompt("Enter Your Product id");
   if (productid !== "" && productid.length == 7) {
     console.log(productid);
