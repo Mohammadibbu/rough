@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         productid = dataL.Regproductid;
         console.log(dataL.Regproductid);
         // uicheck(data.productid, data);
-        productData(productid);
+        productData();
         initialLoader.classList.add("d-none");
       })
       .catch((e) => {
