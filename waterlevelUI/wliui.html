@@ -15,32 +15,38 @@
     <div class="overlay" id="overlayLoader">
       <div class="loader"></div>
     </div>
-    <div class="tank">
-      <div class="top"></div>
-      <div class="water-tank">
-        <div class="layer1"></div>
-        <div class="layer2"></div>
-        <div class="layer3"></div>
-        <div class="layer4"></div>
 
-        <div class="water" id="waterLevel">
-          <!-- <div class="waterwave"></div> -->
+    <div class="container">
+      <div id="pid"></div>
+      <div><button id="logout" class="btn">logout</button></div>
+      <div class="tank-container">
+        <div class="tank">
+          <div class="top"></div>
+          <div class="water-tank">
+            <div class="layer1"></div>
+            <div class="layer2"></div>
+            <div class="layer3"></div>
+            <div class="layer4"></div>
+            <div class="water" id="waterLevel"></div>
+            <div class="txt" id="text"></div>
+          </div>
         </div>
-        <div class="txt" id="text"></div>
+      </div>
+      <div class="actions">
+        <div>
+          <label class="toggle">
+            <input type="checkbox" id="toggleButton" />
+            <span class="slider" id="slider"></span>
+          </label>
+        </div>
+        <div id="auto-manual">Auto mode off</div>
+        <br />
+        <button id="manual-control-btn" class="power-button">
+          <i class="fas fa-power-off"></i>
+        </button>
+        <h3>button status: <span id="manual-status">off</span></h3>
       </div>
     </div>
-    <div>
-      <label class="toggle">
-        <input type="checkbox" id="toggleButton" />
-        <span class="slider" id="slider"></span>
-      </label>
-    </div>
-    <div id="auto-manual">Auto mode off</div>
-    <br />
-    <button id="manual-control-btn" class="power-button">
-      <i class="fas fa-power-off"></i>
-    </button>
-    <h3>button status: <span id="manual-status">off</span></h3>
     <script type="module" src="wliui.js"></script>
   </body>
 </html>
