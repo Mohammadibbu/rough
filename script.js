@@ -174,6 +174,8 @@ add_none(loginPassword, loginError);
 //login with google......
 LoginWithGoogle.addEventListener("click", (e) => {
   e.preventDefault();
+  navigator.vibrate([100]);
+
   loginError.classList.add("d-none");
   //when click the button BUtton will disabled
   btnDisableOrEnable(loginForm_btn);
@@ -257,6 +259,8 @@ LoginWithGoogle.addEventListener("click", (e) => {
 //perform login form action
 loginForm_btn.addEventListener("click", (e) => {
   e.preventDefault();
+  navigator.vibrate([100]);
+
   loginError.classList.remove("d-none");
   btnDisableOrEnable(loginForm_btn);
   btnDisableOrEnable(LoginWithGoogle);
@@ -301,11 +305,8 @@ loginForm_btn.addEventListener("click", (e) => {
         }
       } else {
         loginError.innerHTML = `<div class="alert" style="background-color: #53f877 !important;" >Login Successfully...<i class="fa fa-spinner fa-spin"></i></div>`;
-        // localStorage.setItem("userid<@#(1029384756)#@>", userdetails.user.uid);
-        // localStorage.setItem(
-        //   "userEmail<@#(0192837465)#@>",
-        //   JSON.stringify(userdetails.user)
-        // );
+        navigator.vibrate([100, 50, 100]);
+
         sessionStorage.setItem(
           "userid<@#(1029384756)#@>",
           userdetails.user.uid
@@ -345,6 +346,7 @@ loginForm_btn.addEventListener("click", (e) => {
       loginForm_btn.children[0].classList.remove("fa-spinner", "fa-spin");
       btnDisableOrEnable(loginForm_btn);
       btnDisableOrEnable(LoginWithGoogle);
+      navigator.vibrate([100, 50, 100]);
 
       console.log(e);
       if (email === "" || password === "") {
@@ -380,14 +382,20 @@ const signUpConfirmShowpwd = document.getElementById("signupCnfrm-showpwd");
 
 showpwd.addEventListener("click", (e) => {
   e.preventDefault();
+  navigator.vibrate([50]);
+
   showpassword("login-password", "eye-1");
 });
 signUpShowpwd.addEventListener("click", (e) => {
   e.preventDefault();
+  navigator.vibrate([50]);
+
   showpassword("signup-pwd", "eye-2");
 });
 signUpConfirmShowpwd.addEventListener("click", (e) => {
   e.preventDefault();
+  navigator.vibrate([50]);
+
   showpassword("confirm-password", "eye-3");
 });
 // ------------------------------------------------------------
@@ -449,6 +457,8 @@ add_none(signupConfirmPassword, signupError);
 
 // signup process done here...
 signup_btn.addEventListener("click", function (event) {
+  navigator.vibrate([100]);
+
   event.preventDefault();
   signupError.classList.remove("d-none");
   btnDisableOrEnable(signup_btn);
@@ -462,6 +472,8 @@ signup_btn.addEventListener("click", function (event) {
 
   // Add validation logic for password and confirm password match
   if (password !== confirmPassword) {
+    navigator.vibrate([100, 50, 100]);
+
     signupError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>password do not match</div>`;
     signup_btn.children[0].classList.remove("fa-spinner", "fa-spin");
     btnDisableOrEnable(signup_btn);
@@ -475,6 +487,8 @@ signup_btn.addEventListener("click", function (event) {
     confirmPassword === "" ||
     password === ""
   ) {
+    navigator.vibrate([100, 50, 100]);
+
     signup_btn.children[0].classList.remove("fa-spinner", "fa-spin");
     btnDisableOrEnable(signup_btn);
 
@@ -497,6 +511,7 @@ signup_btn.addEventListener("click", function (event) {
         // Sign up successful, redirect or perform additional actions
         signup_btn.children[0].classList.remove("fa-spinner", "fa-spin");
         btnDisableOrEnable(signup_btn);
+        navigator.vibrate([200, 100, 300]);
 
         console.log(userdetails.user.email);
         console.log(auth.currentUser);
@@ -530,7 +545,7 @@ signup_btn.addEventListener("click", function (event) {
         console.log(e);
         signup_btn.children[0].classList.remove("fa-spinner", "fa-spin");
         btnDisableOrEnable(signup_btn);
-
+        navigator.vibrate([100, 50, 100]);
         if (e.code === "auth/network-request-failed") {
           loginError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>Login Failed Due to Network Issue</div>`;
         } else if (e.code === "auth/email-already-in-use") {
