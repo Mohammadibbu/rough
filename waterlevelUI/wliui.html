@@ -6,6 +6,10 @@
 
     <title>Water Level indicator</title>
     <link rel="stylesheet" href="wliui.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body>
     <div class="overlay" id="overlayLoader">
@@ -33,7 +37,10 @@
     </div>
     <div id="auto-manual">Auto mode off</div>
     <br />
-    <button id="manual-control-btn">check</button>
+    <button id="manual-control-btn" class="power-button">
+      <i class="fas fa-power-off"></i>
+    </button>
+    <h3>button status: <span id="manual-status">off</span></h3>
     <script type="module" src="wliui.js"></script>
   </body>
 </html>
