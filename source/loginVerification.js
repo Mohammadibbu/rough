@@ -21,6 +21,7 @@ const reference = ref(connectDB);
 //initial loader
 const initialLoader = document.getElementById("overlayLoader");
 // get Data and Check Login Verification---------------
+//-----------------------functions--------------------------------------
 function verifyUser(data) {
   if (data) {
     if (
@@ -41,17 +42,6 @@ function verifyUser(data) {
     console.log("no data avail", data);
   }
 }
-//-----------------Get data From Firebase database--------------
-get(child(reference, "users/" + userAuthUid))
-  .then((snapshot) => {
-    let data = snapshot.val();
-    verifyUser(data);
-  })
-  .catch((e) => {
-    console.log("error while fetching data", e);
-    location.replace("index.html");
-  });
-
 // console.log(JSON.parse(localStorage.getItem("userEmail<@#(0192837465)#@>")));
 
 function logout() {
@@ -78,34 +68,15 @@ function logout() {
   }
 }
 document.getElementById("logout").addEventListener("click", logout);
-
-function productCheck() {
-  let productid = prompt("Enter Your Product id");
-  if (productid !== "" && productid.length == 7) {
-    console.log(productid);
-    get(child(reference, "products/" + productid))
-      .then((snapshot) => {
-        let data = snapshot.val();
-        console.log(data.ui);
-        uicheck(productid, data);
-      })
-      .catch((e) => {
-        console.log("error while fetching data", e);
-        // location.replace("index.html");
-      });
-  } else {
-    alert("please enter a valid product id");
-    return productCheck();
-  }
-}
-document.getElementById("product").addEventListener("click", productCheck);
+//uicheck
 function uicheck(productid, data) {
   update(child(ref(connectDB), "products/" + productid), {
     uid: userAuthUid,
     mailid: userAuthExtra.email,
   })
     .then(() => {
-     // location.replace(`/wli/${data.ui}ui.html`);
+      // location.replace(`/waterlevelUI/${data.ui}ui.html`);
+      console.log("logged out");
       // localStorage.removeItem("userid<@#(1029384756)#@>");
       // localStorage.removeItem("userEmail<@#(0192837465)#@>");
     })
@@ -124,6 +95,25 @@ function uicheck(productid, data) {
     .catch((e) => {
       alert("something Went Wrong\nplease Try Again\nERROR:", e.code);
     });
+}
+function productCheck() {
+  let productid = prompt("Enter Your Product id");
+  if (productid !== "" && productid.length == 7) {
+    console.log(productid);
+    get(child(reference, "products/" + productid))
+      .then((snapshot) => {
+        let data = snapshot.val();
+        console.log(data.ui);
+        uicheck(productid, data);
+      })
+      .catch((e) => {
+        console.log("error while fetching data", e);
+        // location.replace("index.html");
+      });
+  } else {
+    alert("please enter a valid product id");
+    return productCheck();
+  }
 }
 function IsAlreadyHaveProductId(uid) {
   get(child(reference, "users/" + uid))
@@ -148,3 +138,16 @@ function IsAlreadyHaveProductId(uid) {
       // location.replace("index.html");
     });
 }
+
+document.getElementById("product").addEventListener("click", productCheck);
+//---------------------------------End functions------------------------------
+//-----------------Get data From Firebase database--------------
+get(child(reference, "users/" + userAuthUid))
+  .then((snapshot) => {
+    let data = snapshot.val();
+    verifyUser(data);
+  })
+  .catch((e) => {
+    console.log("error while fetching data", e);
+    location.replace("index.html");
+  });
