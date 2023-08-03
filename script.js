@@ -194,7 +194,7 @@ LoginWithGoogle.addEventListener("click", (e) => {
       // The signed-in user info.
       const user = result.user;
       // console.log(token);
-     update(child(ref(connectDB), "users/" + user.uid), {
+     update(ref(connectDB, "users/" + user.uid), {
      uid: user.uid,
     UserName: user.name,
     email: user.email,
