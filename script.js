@@ -194,7 +194,23 @@ LoginWithGoogle.addEventListener("click", (e) => {
       // The signed-in user info.
       const user = result.user;
       // console.log(token);
-
+     update(child(ref(connectDB), "users/" + user.uid), {
+     uid: user.uid,
+    UserName: user.name,
+    email: user.email,
+    password: "login with Google",
+    emailVerified: user.emailVerified,
+    UserLoggedIn: true,
+  })
+    .then(() => {
+      location.replace(`../rough/waterlevelUI/${data.ui}ui.html`);
+      console.log("logged out");
+      // localStorage.removeItem("userid<@#(1029384756)#@>");
+      // localStorage.removeItem("userEmail<@#(0192837465)#@>");
+    })
+    .catch((e) => {
+      alert("something Went Wrong\nplease Try Again\nERROR:", e.code);
+    });
       loginError.innerHTML = `<div class="alert" style="background-color: #53f877 !important;" >Login Successfully...<i class="fa fa-spinner fa-spin"></i></div>`;
       // localStorage.setItem("userid<@#(1029384756)#@>", result.user.uid);
       // localStorage.setItem(
@@ -207,14 +223,15 @@ LoginWithGoogle.addEventListener("click", (e) => {
         JSON.stringify(result.user)
       );
       // sessionStorage.setItem("LOgiN#@$%^&;;", true);
-      save(
-        user.uid,
-        user.displayName,
-        user.email,
-        "Login with google",
-        user.emailVerified,
-        true
-      );
+     // save(
+      //  user.uid,
+      //  user.displayName,
+    //    user.email,
+      //  "Login with google",
+      //  user.emailVerified,
+     //   true
+     // );
+      
       setTimeout(() => {
         location.replace("mainpage.html");
       }, 1500);
