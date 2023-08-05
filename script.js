@@ -568,7 +568,10 @@ signup_btn.addEventListener("click", function (event) {
           signupError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>Email id is already Exists</div>`;
         } else if (e.code === "auth/invalid-email") {
           signupError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>Invalid Mailid</div>`;
-        } else {
+}else if (e.code === "auth/weak-password") {
+          signupError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>Password should be at least 6 characters</div>`;
+        }
+        else {
           signupError.innerHTML = `<div class="alert" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>${e.message}</div>`;
         }
 
